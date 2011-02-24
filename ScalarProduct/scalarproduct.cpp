@@ -21,6 +21,7 @@ int main(int argc, char* argv[])
         exit(EXIT_FAILURE);
     }
 
+    // Stream for saving output.
     ostringstream out;
 
     ifstream inFile(argv[1]);
@@ -64,6 +65,8 @@ int main(int argc, char* argv[])
                 << endl;
     }
 
+    // If we've been given an extra parameter, use this as the filename
+    // to write output to. Otherwise, just dump to standard out.
     if(argc > 2)
     {
         ofstream outFile(argv[2]);
