@@ -1,0 +1,11 @@
+*.pyc
+
+Makefile
+*.o
+
+# QtCreator config
+*.pro.user
+
+# Output from running
+*.out
+
