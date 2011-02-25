@@ -1,3 +1,7 @@
+// TODO: Convert to a class to eliminate boilerplate. This could even be
+// a header-only class to eliminate linking problems. Could also create a
+// full skeleton project for easy starting a new problem.
+
 #include <algorithm>
 #include <cstdlib>
 #include <fstream>
@@ -10,19 +14,20 @@
 
 using namespace std;
 
-typedef long long Number;
-
 int main(int argc, char* argv[])
 {
+    //
+    // Boilerplate commandline and opening input
+    //
+
+    // Check commandline
     if(argc < 2)
     {
         cerr << "Need to specify input file." << endl;
         exit(EXIT_FAILURE);
     }
 
-    // Stream for saving output.
-    ostringstream out;
-
+    // Open input file
     ifstream inFile(argv[1]);
     if(!inFile)
     {
@@ -30,6 +35,10 @@ int main(int argc, char* argv[])
         exit(EXIT_FAILURE);
     }
 
+    // Stream for saving output.
+    ostringstream out;
+
+    // Read number of cases
     unsigned int numCases;
     inFile >> numCases;
 
@@ -38,34 +47,43 @@ int main(int argc, char* argv[])
 
     for(unsigned int t = 0; t < numCases; ++t)
     {
-        // Read a line and parse into stringss
+        //
+        // Begin actual algorithm
+        //
+
+        // Read a line and parse into strings
         istream_iterator<string> eos;
         string line;
         getline(inFile, line);
         istringstream buf(line);
-        vector<string> vec1(istream_iterator<string>(buf), eos);
+        vector<string> vec(istream_iterator<string>(buf), eos);
 
         // Reverse
-        reverse(vec1.begin(), vec1.end());
+        reverse(vec.begin(), vec.end());
 
         // Write out case #
         out << "Case #" << t + 1 << ": ";
 
         // Write out words separated by spaces
-        copy(vec1.begin(), vec1.end(), ostream_iterator<string>(out, " "));
+        copy(vec.begin(), vec.end(), ostream_iterator<string>(out, " "));
         out << endl;
     }
 
+    //
+    // More boilerplate output
+    //
+
     // If we've been given an extra parameter, use this as the filename
-    // to write output to. Otherwise, just dump to standard out.
+    // to write output to.
     if(argc > 2)
     {
         ofstream outFile(argv[2]);
         outFile << out.str();
         outFile.close();
     }
-    else
-        cout << out.str();
+
+    // Also dump output to standard out
+    cout << out.str();
 
     return 0;
 }
