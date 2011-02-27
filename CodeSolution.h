@@ -3,9 +3,11 @@
 
 #include <fstream>
 #include <iostream>
+#include <iterator>
 #include <limits>
 #include <string>
 #include <sstream>
+#include <vector>
 
 using namespace std;
 
@@ -18,9 +20,16 @@ public:
     void run();
 
 protected:
+    // Basic functionality
     void getNumCases();
-    string getLine();
     void open(int argc, char* argv[]);
+
+    // Useful helpers
+    string getLine();
+    template<typename T> void lineToVector(vector<T>& vec, size_t n=0);
+    template<typename T> vector<T> lineToVector(size_t n=0);
+    template<typename T> T lineValue();
+    void flushLine();
 
     virtual void solveCase() = 0;
     ostringstream out;
@@ -84,9 +93,12 @@ void CodeSolution::run()
 
 void CodeSolution::getNumCases()
 {
-    inFile >> numCases;
+    numCases = lineValue<int>();
+}
 
-    // Flush trailing newline
+void CodeSolution::flushLine()
+{
+    // Flush up to next newline
     inFile.ignore(numeric_limits<streamsize>::max(),'\n');
 }
 
@@ -95,6 +107,30 @@ string CodeSolution::getLine()
     string line;
     getline(inFile, line);
     return line;
+}
+
+template<typename T> T CodeSolution::lineValue()
+{
+    T value;
+    istringstream buf(getLine());
+    buf >> value;
+    return value;
+}
+
+template<typename T> void CodeSolution::lineToVector(vector<T>& vec, size_t n)
+{
+    if(n > 0)
+        vec.reserve(n);
+    istream_iterator<T> eos;
+    istringstream buf(getLine());
+    vec.insert(vec.end(), istream_iterator<T>(buf), eos);
+}
+
+template<typename T> vector<T> CodeSolution::lineToVector(size_t n)
+{
+    vector<T> vec;
+    lineToVector(vec, n);
+    return vec;
 }
 
 #endif // CODESOLUTION_H
