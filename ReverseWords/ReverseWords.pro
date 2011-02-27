@@ -1,5 +1,6 @@
 TARGET = reversewords
 SOURCES = reversewords.cpp
+INCLUDEPATH += ../
 
 OTHER_FILES += \
     B-small-practice.in \
