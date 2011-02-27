@@ -1,7 +1,6 @@
 #include "CodeSolution.h"
 
 #include <algorithm>
-#include <iterator>
 #include <numeric>
 #include <sstream>
 #include <vector>
@@ -15,17 +14,11 @@ class ScalarProductSolution : public CodeSolution
     void solveCase()
     {
         // Flush line with vector size, since we don't use it
-        getLine();
+        unsigned int vecSize = lineValue<unsigned int>();
 
-        // Read a line and parse into integers
-        istream_iterator<Number> eos;
-        istringstream buf(getLine());
-        vector<Number> vec1(istream_iterator<Number>(buf), eos);
-
-        // Read second line into integers
-        buf.str(getLine());
-        buf.clear();
-        vector<Number> vec2(istream_iterator<Number>(buf), eos);
+        // Read 2 lines and parse into integers
+        vector<Number> vec1 = lineToVector<Number>(vecSize);
+        vector<Number> vec2 = lineToVector<Number>(vecSize);
 
         // Sort one ascending, one descending
         sort(vec1.begin(), vec1.end());

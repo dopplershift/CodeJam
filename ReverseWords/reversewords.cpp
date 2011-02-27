@@ -13,9 +13,7 @@ class ReverseWordsSolution : public CodeSolution
     void solveCase()
     {
         // Read a line and parse into strings
-        istream_iterator<string> eos;
-        istringstream buf(getLine());
-        vector<string> vec(istream_iterator<string>(buf), eos);
+        vector<string> vec = lineToVector<string>();
 
         // Reverse
         reverse(vec.begin(), vec.end());
