@@ -26,13 +26,13 @@ class CodeSolution
 public:
 	~CodeSolution();
 
-	int process(int argc, char* argv[]);
+	int process(int argc, const char* argv[]);
 	void run();
 
 protected:
 	// Basic functionality
 	void getNumCases();
-	void open(int argc, char* argv[]);
+	void open(int argc, const char* argv[]);
 
 	// Useful helpers
 	string getLine();
@@ -63,14 +63,14 @@ CodeSolution::~CodeSolution()
 	cout << out.str();
 }
 
-int CodeSolution::process(int argc, char *argv[])
+int CodeSolution::process(int argc, const char *argv[])
 {
 	open(argc, argv);
 	run();
 	return 0;
 }
 
-void CodeSolution::open(int argc, char *argv[])
+void CodeSolution::open(int argc, const char *argv[])
 {
 	// Check commandline
 	if(argc < 2)
