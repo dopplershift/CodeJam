@@ -23,7 +23,7 @@ class ReverseWordsSolution : public CodeSolution
     }
 };
 
-int main(int argc, char* argv[])
+int main(int argc, const char* argv[])
 {
     ReverseWordsSolution rws;
     return rws.process(argc, argv);
