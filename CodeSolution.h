@@ -31,7 +31,6 @@ public:
 
 protected:
 	// Basic functionality
-	void getNumCases();
 	void open(int argc, const char* argv[]);
 
 	// Useful helpers
@@ -41,13 +40,14 @@ protected:
 	template<typename T> T lineValue();
 	void flushLine();
 
+	virtual void initialRead();
 	virtual void solveCase() = 0;
 	ostringstream out;
+	unsigned int numCases;
+	ifstream inFile;
 
 private:
-	ifstream inFile;
 	ofstream outFile;
-	unsigned int numCases;
 };
 
 CodeSolution::~CodeSolution()
@@ -96,7 +96,7 @@ void CodeSolution::open(int argc, const char *argv[])
 void CodeSolution::run()
 {
 	// Start by reading the number of cases
-	getNumCases();
+	initialRead();
 
 	for(unsigned int t = 0; t < numCases; ++t)
 	{
@@ -107,7 +107,7 @@ void CodeSolution::run()
 	}
 }
 
-void CodeSolution::getNumCases()
+void CodeSolution::initialRead()
 {
 	numCases = lineValue<int>();
 }
